@@ -1,0 +1,25 @@
+{
+  "name": "codatsoft/codat-clover",
+  "version": "1.0.0",
+  "description": "Codatsoft Clover Framework 1.0.0",
+  "license": "MIT",
+  "type": "library",
+  "require": {
+    "php": "^8.3",
+    "laravel/framework": "^12",
+    "guzzlehttp/guzzle": "^7.9",
+    "sentry/sentry-laravel": "^4.5.0",
+    "codatsoft/codatbase": "^3.10"
+  },
+  "autoload": {
+    "psr-4": {
+      "Codatsoft\\CodatClover\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Bassel Hadba",
+      "email": "bassel@codatsoft.com"
+    }
+  ]
+}
