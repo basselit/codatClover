@@ -17,6 +17,9 @@ class STClover
     public CLMerchant $curMerch;
     public TModelNetwork $model;
 
+    public bool $success = true;
+    public string $message = "";
+
     public function __construct(CLMerchant $theMerch)
     {
         $this->curMerch = $theMerch;
@@ -39,7 +42,39 @@ class STClover
 
     }
 
-    public function loadEmployee(string $mobileNumber): CLEmployee
+    public function loadEmployeeById(string $employeeId): CLEmployee
+    {
+        $this->common();
+        $this->model->addParameter(CLParameters::EMPLOYEE_ID, $employeeId);
+        $this->model->setEndPoint(CLEndpoints::EMPLOYEE);
+        $network = $this->model->runFilter();
+        $emp = STJson::parseEmployee($network->content);
+        return $emp;
+
+    }
+
+    public function editEmployeeMobile(string $employeeId, string $mobile): ?CLEmployee
+    {
+        $this->common();
+        $this->model->addParameter(CLParameters::EMPLOYEE_ID, $employeeId);
+        $this->model->setEndPoint(CLEndpoints::EMPLOYEE_EDIT);
+        $post = new stdClass();
+        $post->phoneNumber = $mobile;
+        $this->model->setPost($post);
+        $network = $this->model->runFilter();
+        if ($network->success) {
+            $emp = STJson::parseEmployee($network->content);
+            return $emp;
+        } else
+        {
+            $this->success = false;
+            $this->message = $network->message;
+            return null;
+        }
+
+    }
+
+    public function loadEmployeeByMobile(string $mobileNumber): CLEmployee
     {
         $all = $this->loadEmployees();
         $find = $all->findByMobileNumber($mobileNumber);
@@ -88,47 +123,7 @@ class STClover
         return $devs;
     }
 
-    public function updateDevices(CLDevices $devs): void
-    {
-        foreach ($devs as $device)
-        {
-            try {
-                $newDev = new Device();
-                $newDev->device_id = $device->id;
-                $newDev->device_serial = $device->serial;
-                $newDev->device_model = $device->model;
-                $newDev->merchant_id = $device->merchantId;
-                $newDev->save();
-            } catch (QueryException $exception)
-            {
-                $code = $exception->getCode();
-                if ($code != 23000)
-                {
-                    \Sentry\captureException($exception);
-                    return;
 
-                }
-
-            } catch (\Exception $exception)
-            {
-                \Sentry\captureException($exception);
-            }
-        }
-
-    }
-
-    public function updateDevicesOnline(CLDevices $devs): void
-    {
-
-        foreach ($devs as $device)
-        {
-            $isOnline = $this->checkDeviceOnline($device->id);
-            $findDev = Device::where('device_id',$device->id)->first();
-            $findDev->is_device_online = $isOnline;
-            $findDev->save();
-        }
-
-    }
 
 
 

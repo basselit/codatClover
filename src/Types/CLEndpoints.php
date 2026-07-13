@@ -5,7 +5,9 @@ namespace Codatsoft\CodatClover\Types;
 abstract class CLEndpoints
 {
     const EMPLOYEE_ADD = "/v3/merchants/{MERCHANT_ID}/employees:post";
+    const EMPLOYEE_EDIT = "/v3/merchants/{MERCHANT_ID}/employees/{EMPLOYEE_ID}:post";
     const EMPLOYEES = "/v3/merchants/{MERCHANT_ID}/employees?limit=1000:get";
+    const EMPLOYEE = "/v3/merchants/{MERCHANT_ID}/employees/{EMPLOYEE_ID}?limit=1000:get";
     const DEVICES = "/v3/merchants/{MERCHANT_ID}/devices?limit=1000:get";
     const DEVICE = "/v3/merchants/{MERCHANT_ID}/devices/{DEVICE_ID}:get";
     const ITEMS = "/v3/merchants/{MERCHANT_ID}/items?limit=1000";

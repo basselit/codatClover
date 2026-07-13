@@ -188,6 +188,12 @@ class STJson
             $newEmp->nickname = $one->nickname;
         }
 
+        if (property_exists($one,'phoneNumber'))
+        {
+            $newEmp->phoneNumber = $one->phoneNumber;
+        }
+
+
         $newEmp->role = $one->role;
         if ($one->id == 'GAEJ6P67SQTY4')
         {
