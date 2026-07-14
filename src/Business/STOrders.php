@@ -12,6 +12,7 @@ use Codatsoft\CodatClover\Models\CLOrders;
 use Codatsoft\CodatClover\Types\CLEndpoints;
 use Codatsoft\CodatClover\Types\CLParameters;
 use Codatsoft\CodatClover\Types\CLParseStatus;
+use stdClass;
 
 class STOrders
 {
@@ -71,6 +72,29 @@ class STOrders
 
         $this->parseSuccess = false;
         $this->parseMessage = $network->message;
+        return null;
+
+    }
+
+    public static function findEmployeeFromOrder(stdClass $order): ?stdClass
+    {
+        if (property_exists($order,'employee'))
+        {
+            return $order->employee;
+        }
+
+        if (property_exists($order,'payments'))
+        {
+            if (count($order->payments->elements) > 0)
+            {
+                $pay = $order->payments->elements[0];
+                if (property_exists($pay,'employee'))
+                {
+                    return $pay->employee;
+                }
+            }
+        }
+
         return null;
 
     }

@@ -42,7 +42,8 @@ class STJson
             foreach ($jo->elements as $one) {
                 if ($filter)
                 {
-                    $empId = $one->employee->id;
+                    $findEmp = STOrders::findEmployeeFromOrder($one);
+                    $empId = $findEmp->id;
                     if (in_array($empId, $filterForEmployees))
                     {
                         $newOrder = self::parseOrder($one,$curMerch);
