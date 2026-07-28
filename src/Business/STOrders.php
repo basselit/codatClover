@@ -158,6 +158,27 @@ class STOrders
 
     }
 
+    public function loadOrdersOneDayPure(int $month, int $day, int $year, int $totalParts = 1, int $curPart = 1): ?stdClass
+    {
+        $teckDate = $month . '-' . $day . '-' . $year;
+        $dtRange = STDates::getOneDayDateRange($teckDate,$totalParts ,$curPart);
+
+        $this->model->setEndPoint(CLEndpoints::ORDERS_BY_DATE);
+        $this->model->addParameter(CLParameters::START_TIMESTAMP, $dtRange->unixStartTime);
+        $this->model->addParameter(CLParameters::END_TIMESTAMP, $dtRange->unixEndTime);
+        $network = $this->model->runFilter();
+
+        if ($network->success)
+        {
+            $this->parseSuccess = true;
+            return $network->content;
+        }
+
+        $this->parseSuccess = false;
+        $this->parseMessage = $network->message;
+        return null;
+    }
+
     public function loadOrdersOneDay(int $month, int $day, int $year, int $totalParts = 1, int $curPart = 1): ?CLOrders
     {
         $teckDate = $month . '-' . $day . '-' . $year;
