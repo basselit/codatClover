@@ -166,6 +166,7 @@ class ClOrderConverter
         {
             $cl->total = $jo->total;
             return $cl;
+
         }
 
         if ($cl->hasPayments)

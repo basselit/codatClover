@@ -18,6 +18,7 @@ class STJson
     public static function parseOrder(stdClass $order, CLMerchant $curMerch): CLOrder
     {
         $newOrder = ClOrderConverter::convert($order);
+
         $newOrder->accountId = $curMerch->accountId;
         $newOrder->merchantId = $curMerch->id;
         $newOrder->merchantCode = $curMerch->gatewayMerchantCode;

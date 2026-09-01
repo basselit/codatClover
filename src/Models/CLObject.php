@@ -5,7 +5,7 @@ namespace Codatsoft\CodatClover\Models;
 use App\Clover\Business\STJson;
 use App\Clover\Types\CLEndpoints;
 use App\Clover\Types\CLParameters;
-use App\TeckPay\Models\TMerchant;
+use App\TeckPay\Models\DBMapped\TMerchant;
 use Codatsoft\Codatbase\Base\TModelNetwork;
 
 class CLObject extends TModelNetwork

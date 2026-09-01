@@ -10,6 +10,9 @@ abstract class CLEndpoints
     const EMPLOYEE = "/v3/merchants/{MERCHANT_ID}/employees/{EMPLOYEE_ID}?limit=1000:get";
     const DEVICES = "/v3/merchants/{MERCHANT_ID}/devices?limit=1000:get";
     const DEVICE = "/v3/merchants/{MERCHANT_ID}/devices/{DEVICE_ID}:get";
+    // app-scoped (NOT merchant-scoped): requires the app's OAuth token, and
+    // {DEVICE_ID} is clover's device uuid, not the serial
+    const DEVICE_NOTIFICATION = "/v3/apps/{APP_ID}/devices/{DEVICE_ID}/notifications:post";
     const ITEMS = "/v3/merchants/{MERCHANT_ID}/items?limit=1000";
     const ORDERS_BY_EMPLOYEE = "/v3/merchants/{MERCHANT_ID}/orders?filter=employee.id={EMPLOYEE_ID}&expand&expand=employee&expand=lineItems&expand=payments&expand=payments.cardTransaction&expand=customers&expand=voids&forceRealTime=true&expand=payments.employee&limit={LIMIT}:get";
     const ORDERS_BY_IDS = "/v3/merchants/{MERCHANT_ID}/orders?filter={ORDERS_IDS}&expand=employee&expand=lineItems&expand=payments&expand=payments.cardTransaction&expand=customers&expand=voids&expand=payments.employee&limit=1000&forceRealTime=true:get";

@@ -161,6 +161,7 @@ class STOrders
     public function loadOrdersOneDayPure(int $month, int $day, int $year, int $totalParts = 1, int $curPart = 1): ?stdClass
     {
         $teckDate = $month . '-' . $day . '-' . $year;
+
         $dtRange = STDates::getOneDayDateRange($teckDate,$totalParts ,$curPart);
 
         $this->model->setEndPoint(CLEndpoints::ORDERS_BY_DATE);

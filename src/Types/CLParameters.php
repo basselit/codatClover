@@ -13,5 +13,6 @@ abstract class CLParameters
     const START_TIMESTAMP = "{START_TIMESTAMP}";
     const END_TIMESTAMP = "{END_TIMESTAMP}";
     const DEVICE_ID = "{DEVICE_ID}";
+    const APP_ID = "{APP_ID}";
 
 }

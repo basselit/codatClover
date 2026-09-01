@@ -4,13 +4,13 @@
 namespace Codatsoft\CodatClover\Models;
 
 
-use App\Models\MerchantUser;
+use App\TeckPay\DBModels\MerchantUser;
 use App\Models\MerchantUserPending;
 use App\Models\User;
-use App\TeckPay\Models\TMerchant;
-use App\TeckPay\Models\TMerchantPendingUsers;
-use App\TeckPay\Models\TMerchants;
-use App\TeckPay\Models\TUsers;
+use App\TeckPay\Models\DBMapped\TMerchant;
+use App\TeckPay\Models\DBMapped\TMerchantPendingUsers;
+use App\TeckPay\Models\DBMapped\TMerchants;
+use App\TeckPay\Models\DBMapped\TUsers;
 use Countable;
 use Iterator;
 
