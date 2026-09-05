@@ -14,5 +14,6 @@ abstract class CLParameters
     const END_TIMESTAMP = "{END_TIMESTAMP}";
     const DEVICE_ID = "{DEVICE_ID}";
     const APP_ID = "{APP_ID}";
+    const OFFSET = "{OFFSET}";
 
 }

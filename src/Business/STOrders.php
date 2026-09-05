@@ -50,6 +50,24 @@ class STOrders
         $this->model->create($this->curMerch->gatewayUrl, $this->curMerch->gatewayPasswordToken);
         $this->model->addParameter(CLParameters::MERCHANT_ID,$this->curMerch->gatewayMerchantCode);
     }
+    
+    public function loadCustomers(int $offset)
+    {
+        $this->model->setEndPoint(CLEndpoints::CUSTOMERS);
+        $this->model->addParameter(CLParameters::OFFSET,$offset);
+        $network = $this->model->runFilter();
+
+        if ($network->success)
+        {
+            return $network->content;
+
+        }
+
+        $this->parseSuccess = false;
+        $this->parseMessage = $network->message;
+        return null;
+
+    }
 
     public function loadOrder(string $orderId): ?CLOrder
     {

@@ -21,5 +21,6 @@ abstract class CLEndpoints
     const string ORDERS_BY_DATE = "/v3/merchants/{MERCHANT_ID}/orders?filter=clientCreatedTime>={START_TIMESTAMP}&filter=clientCreatedTime<={END_TIMESTAMP}&expand=employee&expand=lineItems&expand=payments&expand=payments.cardTransaction&expand=customers&expand=voids&expand=payments.employee&limit=1000&forceRealTime=true:get";
     const string PAYMENTS_BY_DATE = "/v3/merchants/{MERCHANT_ID}/payments?filter=clientCreatedTime>={START_TIMESTAMP}&filter=clientCreatedTime<={END_TIMESTAMP}&expand=employee&expand=lineItems&expand=cardTransaction&expand=card&expand=customers&expand=tender&expand=cardTransaction.paymentRef&expand=cardTransaction.extra&limit=1000&forceRealTime=true:get";
     const string ORDERS_BY_EMPLOYEE_DATES = "/v3/merchants/{MERCHANT_ID}/orders?filter=employee.id={EMPLOYEE_ID}&filter=clientCreatedTime>={START_TIMESTAMP}&filter=clientCreatedTime<={END_TIMESTAMP}&expand=employee&expand=lineItems&expand=payments&expand=payments.cardTransaction&expand=customers&expand=voids&expand=payments.employee&limit=1000&forceRealTime=true";
+    const string CUSTOMERS = "/v3/merchants/{MERCHANT_ID}/customers?expand=addresses&expand=emailAddresses&expand=phoneNumbers&expand=cards&expand=metadata&offset={OFFSET}&limit=1000:get";
 
 }
