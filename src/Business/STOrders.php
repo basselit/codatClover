@@ -158,6 +158,26 @@ class STOrders
 
     }
 
+    public function loadOrdersForCards(array $orderIdsArray): ?stdClass
+    {
+        $orderIds = "id in ('" . implode("','", $orderIdsArray) . "')";
+
+        $this->model->setEndPoint(CLEndpoints::ORDERS_BY_IDS_CARDS);
+        $this->model->addParameter(CLParameters::ORDERS_IDS, $orderIds);
+        $network = $this->model->runFilter();
+
+        if ($network->success)
+        {
+            return $network->content;
+        }
+
+        $this->parseSuccess = false;
+        $this->parseMessage = $network->message;
+        return null;
+
+    }
+
+
     public function loadOrdersOneDayPure(int $month, int $day, int $year, int $totalParts = 1, int $curPart = 1): ?stdClass
     {
         $teckDate = $month . '-' . $day . '-' . $year;
