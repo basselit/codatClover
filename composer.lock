@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31004ace0c07a098919fa83f6a24eccb",
+    "content-hash": "5a802d036877e86b727e4098b483cde7",
     "packages": [
         {
             "name": "brick/math",
@@ -137,16 +137,16 @@
         },
         {
             "name": "codatsoft/codatbase",
-            "version": "3.12.0",
+            "version": "3.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/basselit/codatbase.git",
-                "reference": "dbad7a4d5b9640ceed6ac95f4c996db89b03d4c8"
+                "reference": "36b6365315144580b910711a2ac159eaeebd08a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basselit/codatbase/zipball/dbad7a4d5b9640ceed6ac95f4c996db89b03d4c8",
-                "reference": "dbad7a4d5b9640ceed6ac95f4c996db89b03d4c8",
+                "url": "https://api.github.com/repos/basselit/codatbase/zipball/36b6365315144580b910711a2ac159eaeebd08a9",
+                "reference": "36b6365315144580b910711a2ac159eaeebd08a9",
                 "shasum": ""
             },
             "require": {
@@ -156,6 +156,13 @@
                 "sentry/sentry-laravel": "^4.5.0"
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Codatsoft\\Codatbase\\CodatbaseServiceProvider"
+                    ]
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Codatsoft\\Codatbase\\": "src/"
@@ -171,12 +178,12 @@
                     "email": "bassel@codatsoft.com"
                 }
             ],
-            "description": "Codatsoft Codebase Framework 3.12.0",
+            "description": "Codatsoft Codebase Framework 3.20.0",
             "support": {
                 "issues": "https://github.com/basselit/codatbase/issues",
-                "source": "https://github.com/basselit/codatbase/tree/v3.12.0"
+                "source": "https://github.com/basselit/codatbase/tree/v3.20.0"
             },
-            "time": "2026-07-28T20:07:20+00:00"
+            "time": "2026-09-05T18:46:33+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
