@@ -68,6 +68,25 @@ class STOrders
         return null;
 
     }
+    
+    public function loadCustomerById(string $customerId)
+    {
+        $this->model->setEndPoint(CLEndpoints::CUSTOMER_BY_ID);
+        $this->model->addParameter(CLParameters::CUSTOMER_BY_ID,$customerId);
+        $network = $this->model->runFilter();
+
+        if ($network->success)
+        {
+            return $network->content;
+
+        }
+
+        $this->parseSuccess = false;
+        $this->parseMessage = $network->message;
+        return null;
+
+
+    }
 
     public function loadOrder(string $orderId): ?CLOrder
     {
@@ -167,6 +186,31 @@ class STOrders
                 return null;
             }
 
+            return $parOrder;
+        }
+
+        $this->parseSuccess = false;
+        $this->parseMessage = $network->message;
+        return null;
+
+    }
+
+    public function loadOrdersLast(): ?CLOrders
+    {
+        $this->model->setEndPoint(CLEndpoints::ORDERS_BY_LAST);
+        $network = $this->model->runFilter();
+
+        if ($network->success)
+        {
+            $parOrder = STJson::parseOrders($network->content,$this->curMerch, $this->filterForEmployeeIds);
+            if (!$parOrder->parseSuccess)
+            {
+                $this->parseSuccess = false;
+                $this->parseMessage = CLParseStatus::getParseDesc($parOrder->parseErrorCode);
+                return null;
+            }
+            
+            $this->parseSuccess = true;
             return $parOrder;
         }
 

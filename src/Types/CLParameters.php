@@ -15,5 +15,6 @@ abstract class CLParameters
     const DEVICE_ID = "{DEVICE_ID}";
     const APP_ID = "{APP_ID}";
     const OFFSET = "{OFFSET}";
+    const CUSTOMER_BY_ID = "{CUSTOMER_BY_ID}";
 
 }
