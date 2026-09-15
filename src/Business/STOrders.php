@@ -28,8 +28,7 @@ class STOrders
 
     public function __construct(CLMerchant $theMerch)
     {
-        //$this->curMerch = DBBusFind::getTPayMerch();
-//        $this->curMerch = STCache::getMerchant();
+        $this->parseSuccess = true;
         if ($theMerch->filterField != null)
         {
             $tmpClover = new STClover($theMerch);
