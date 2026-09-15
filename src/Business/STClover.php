@@ -32,12 +32,19 @@ class STClover
         $this->model->addParameter(CLParameters::MERCHANT_ID,$this->curMerch->gatewayMerchantCode);
     }
 
-    public function loadEmployees(): CLEmployees
+    public function loadEmployees(): ?CLEmployees
     {
         $this->common();
         $this->model->setEndPoint(CLEndpoints::EMPLOYEES);
         $network = $this->model->runFilter();
+        if (!$network->success)
+        {
+            $this->success = false;
+            $this->message = $network->message;
+            return null;
+        }
         $emps = STJson::parseEmployees($network->content, $this->curMerch);
+        $this->success = true;
         return $emps;
 
     }

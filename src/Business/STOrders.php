@@ -34,6 +34,12 @@ class STOrders
         {
             $tmpClover = new STClover($theMerch);
             $emps = $tmpClover->loadEmployees();
+            if (!$tmpClover->success)
+            {
+                $this->parseSuccess = false;
+                $this->parseMessage = $tmpClover->message;
+                return;
+            }
             $this->filterForEmployeeIds = array_column($emps->elements, 'id');
         } else
         {
