@@ -1,7 +1,7 @@
 {
   "name": "codatsoft/codat-clover",
-  "version": "2.0.0",
-  "description": "Codatsoft Clover Framework 2.0.0",
+  "version": "2.1.0",
+  "description": "Codatsoft Clover Framework 2.1.0",
   "license": "MIT",
   "type": "library",
   "require": {
@@ -9,7 +9,7 @@
     "laravel/framework": "^12",
     "guzzlehttp/guzzle": "^7.9",
     "sentry/sentry-laravel": "^4.5.0",
-    "codatsoft/codatbase": "^3.20"
+    "codatsoft/codatbase": "^4.1"
   },
   "autoload": {
     "psr-4": {
