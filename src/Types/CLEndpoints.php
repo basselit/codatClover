@@ -13,7 +13,7 @@ abstract class CLEndpoints
     // app-scoped (NOT merchant-scoped): requires the app's OAuth token, and
     // {DEVICE_ID} is clover's device uuid, not the serial
     const string DEVICE_NOTIFICATION = "/v3/apps/{APP_ID}/devices/{DEVICE_ID}/notifications:post";
-    const string ITEMS = "/v3/merchants/{MERCHANT_ID}/items?limit=1000";
+    const string ITEMS = "/v3/merchants/{MERCHANT_ID}/items?limit=1000:get";
     const string ORDERS_BY_EMPLOYEE = "/v3/merchants/{MERCHANT_ID}/orders?filter=employee.id={EMPLOYEE_ID}&expand&expand=employee&expand=lineItems&expand=payments&expand=payments.cardTransaction&expand=customers&expand=voids&forceRealTime=true&expand=payments.employee&limit={LIMIT}:get";
     const string ORDERS_BY_IDS = "/v3/merchants/{MERCHANT_ID}/orders?filter={ORDERS_IDS}&expand=employee&expand=lineItems&expand=payments&expand=payments.cardTransaction&expand=customers&expand=voids&expand=payments.employee&limit=1000&forceRealTime=true:get";
     const string ORDERS_BY_IDS_CARDS = "/v3/merchants/{MERCHANT_ID}/orders?filter={ORDERS_IDS}&expand=payments&expand=payments.cardTransaction&expand=customers&limit=1000&forceRealTime=true:get";
@@ -24,5 +24,5 @@ abstract class CLEndpoints
     const string ORDERS_BY_EMPLOYEE_DATES = "/v3/merchants/{MERCHANT_ID}/orders?filter=employee.id={EMPLOYEE_ID}&filter=clientCreatedTime>={START_TIMESTAMP}&filter=clientCreatedTime<={END_TIMESTAMP}&expand=employee&expand=lineItems&expand=payments&expand=payments.cardTransaction&expand=customers&expand=voids&expand=payments.employee&limit=1000&forceRealTime=true";
     const string CUSTOMERS = "/v3/merchants/{MERCHANT_ID}/customers?expand=addresses&expand=emailAddresses&expand=phoneNumbers&expand=cards&expand=metadata&offset={OFFSET}&limit=1000:get";
     const string CUSTOMER_BY_ID = "/v3/merchants/{MERCHANT_ID}/customers/{CUSTOMER_ID}?expand=addresses&expand=emailAddresses&expand=phoneNumbers&expand=cards&expand=metadata&limit=1000:get";
-
+    const string ITEM_ADD = "/v3/merchants/{MERCHANT_ID}/items?limit=1000:post";
 }

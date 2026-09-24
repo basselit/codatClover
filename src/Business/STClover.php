@@ -6,6 +6,8 @@ use Codatsoft\Codatbase\Base\TModelNetwork;
 use Codatsoft\CodatClover\Models\CLDevices;
 use Codatsoft\CodatClover\Models\CLEmployee;
 use Codatsoft\CodatClover\Models\CLEmployees;
+use Codatsoft\CodatClover\Models\CLItem;
+use Codatsoft\CodatClover\Models\CLItems;
 use Codatsoft\CodatClover\Models\CLMerchant;
 use Codatsoft\CodatClover\Types\CLEndpoints;
 use Codatsoft\CodatClover\Types\CLParameters;
@@ -185,6 +187,21 @@ class STClover
         return STJson::parseEmployee($network->content);
     }
 
+    public function addItem(CLItem $item): CLItem
+    {
+        $this->common();
+        $this->model->setEndPoint(CLEndpoints::ITEM_ADD);
+        $postItem = new stdClass();
+        $postItem->hidden = $item->hidden;
+        $postItem->name = $item->name;
+        $postItem->price = $item->price;
+        $postItem->priceType = $item->priceType;
+        $postItem->code = $item->code;
+        $this->model->setPost($postItem);
+        $network = $this->model->runFilter();
+        return STJson::parseItem($network->content);
+    }
+
     public function checkDeviceOnline(string $deviceId): bool
     {
         $this->common();
@@ -203,6 +220,16 @@ class STClover
         $network = $this->model->runFilter();
         $devs = STJson::parseDevices($network->content, $this->curMerch->id);
         return $devs;
+    }
+
+    public function loadItems(): CLItems
+    {
+        $this->common();
+        $this->model->setEndPoint(CLEndpoints::ITEMS);
+        $network = $this->model->runFilter();
+        $devs = STJson::parseItems($network->content);
+        return $devs;
+
     }
 
     //the notification api is app-scoped: it authenticates with the app's OAuth

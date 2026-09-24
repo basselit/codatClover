@@ -6,6 +6,8 @@ use Codatsoft\CodatClover\Models\CLDevice;
 use Codatsoft\CodatClover\Models\CLDevices;
 use Codatsoft\CodatClover\Models\CLEmployee;
 use Codatsoft\CodatClover\Models\CLEmployees;
+use Codatsoft\CodatClover\Models\CLItem;
+use Codatsoft\CodatClover\Models\CLItems;
 use Codatsoft\CodatClover\Models\CLMerchant;
 use Codatsoft\CodatClover\Models\CLOrder;
 use Codatsoft\CodatClover\Models\CLOrders;
@@ -94,6 +96,12 @@ class STJson
 
     }
 
+    public static function parseItems(stdClass $jo): CLItems
+    {
+        $items = new CLItems($jo);
+        return $items;
+    }
+
     public static function parseDevices(stdClass $jo, int $merchId): CLDevices
     {
         $devices = new CLDevices();
@@ -170,6 +178,18 @@ class STJson
             return !$contains;
         }
 
+    }
+
+    public static function parseItem($item): CLItem
+    {
+        $newItem = new CLItem();
+        $newItem->id = $item->id;
+        $newItem->name = $item->name;
+        $newItem->hidden = $item->hidden;
+        $newItem->priceType = $item->priceType;
+        $newItem->price = $item->price;
+        $newItem->code = $item->code;
+        return $newItem;
     }
 
     public static function parseEmployee($one): CLEmployee
