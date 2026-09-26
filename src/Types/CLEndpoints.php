@@ -25,4 +25,9 @@ abstract class CLEndpoints
     const string CUSTOMERS = "/v3/merchants/{MERCHANT_ID}/customers?expand=addresses&expand=emailAddresses&expand=phoneNumbers&expand=cards&expand=metadata&offset={OFFSET}&limit=1000:get";
     const string CUSTOMER_BY_ID = "/v3/merchants/{MERCHANT_ID}/customers/{CUSTOMER_ID}?expand=addresses&expand=emailAddresses&expand=phoneNumbers&expand=cards&expand=metadata&limit=1000:get";
     const string ITEM_ADD = "/v3/merchants/{MERCHANT_ID}/items?limit=1000:post";
+    // oauth onboarding: the merchant profile with its owner and address, its
+    // properties (time zone), and the employee the access token belongs to
+    const string MERCHANT = "/v3/merchants/{MERCHANT_ID}?expand=owner&expand=address:get";
+    const string MERCHANT_PROPERTIES = "/v3/merchants/{MERCHANT_ID}/properties:get";
+    const string EMPLOYEE_CURRENT = "/v3/merchants/{MERCHANT_ID}/employees/current:get";
 }

@@ -232,6 +232,52 @@ class STClover
 
     }
 
+    //the merchant profile with its owner and address, as clover sends it (the host
+    //app maps the fields it needs). null when the read failed; see $message.
+    public function loadMerchantProfile(): ?stdClass
+    {
+        return $this->loadObject(CLEndpoints::MERCHANT);
+
+    }
+
+    //merchant properties (time zone among them); null when the read failed
+    public function loadMerchantProperties(): ?stdClass
+    {
+        return $this->loadObject(CLEndpoints::MERCHANT_PROPERTIES);
+
+    }
+
+    //whether the employee the access token belongs to is the merchant owner. clover
+    //reports the owner with role ADMIN, so isOwner is the flag to trust, not the role.
+    //false on any failure too — check $success to tell the two apart.
+    public function isCurrentEmployeeOwner(): bool
+    {
+        $employee = $this->loadObject(CLEndpoints::EMPLOYEE_CURRENT);
+
+        return !is_null($employee) && ($employee->isOwner ?? false) === true;
+
+    }
+
+    private function loadObject(string $endPoint): ?stdClass
+    {
+        $this->common();
+        $this->model->setEndPoint($endPoint);
+        $network = $this->model->runFilter();
+
+        if (!$network->success || !($network->content instanceof stdClass))
+        {
+            $this->success = false;
+            $this->message = $network->message ?? 'Clover returned no object';
+            return null;
+        }
+
+        $this->success = true;
+        $this->message = '';
+
+        return $network->content;
+
+    }
+
     //the notification api is app-scoped: it authenticates with the app's OAuth
     //access token, not the merchant api token. the payload may arrive null on the
     //device, so treat the event name as the signal and fetch data over the api.
