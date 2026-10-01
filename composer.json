@@ -1,7 +1,7 @@
 {
   "name": "codatsoft/codat-clover",
-  "version": "2.4.0",
-  "description": "Codatsoft Clover Framework 2.4.0",
+  "version": "2.5.0",
+  "description": "Codatsoft Clover Framework 2.5.0",
   "license": "MIT",
   "type": "library",
   "require": {

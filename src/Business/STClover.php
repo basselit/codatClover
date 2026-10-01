@@ -279,8 +279,9 @@ class STClover
     }
 
     //the notification api is app-scoped: it authenticates with the app's OAuth
-    //access token, not the merchant api token. the payload may arrive null on the
-    //device, so treat the event name as the signal and fetch data over the api.
+    //access token, not the merchant api token. clover reads the payload from the
+    //`data` field (string, max 4000 chars) and hands it to the device as
+    //AppNotification.payload; an empty payload is left out and arrives as null.
     public function sendDeviceNotification(string $appId, string $oauthToken, string $deviceId, string $event, string $payload = ''): bool
     {
         $this->model = new TModelNetwork();
@@ -291,7 +292,10 @@ class STClover
 
         $post = new stdClass();
         $post->event = $event;
-        $post->payload = $payload;
+        if ($payload !== '')
+        {
+            $post->data = $payload;
+        }
         $this->model->setPost($post);
 
         $network = $this->model->runFilter();
