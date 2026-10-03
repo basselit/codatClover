@@ -122,6 +122,11 @@ class STJson
         $device->model = $jo->model;
         $device->serial = $jo->serial;
 
+        if (property_exists($jo,'productName'))
+        {
+            $device->productName = $jo->productName;
+        }
+
         return $device;
 
     }

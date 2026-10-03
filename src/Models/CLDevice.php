@@ -10,6 +10,7 @@ class CLDevice
     public string $id;
     public string $model;
     public int $merchantId;
+    public ?string $productName = null;
     public string $merchantName;
     public ?bool $isDeviceOnline = null;
 
