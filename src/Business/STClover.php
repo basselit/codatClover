@@ -218,8 +218,20 @@ class STClover
         $this->common();
         $this->model->setEndPoint(CLEndpoints::DEVICES);
         $network = $this->model->runFilter();
-        $devs = STJson::parseDevices($network->content, $this->curMerch->id);
-        return $devs;
+
+        //a refused call (expired or wrong token) answers with no object: report it
+        //instead of handing parseDevices a null (which fatals with a TypeError)
+        if (!$network->success || !($network->content instanceof stdClass))
+        {
+            $this->success = false;
+            $this->message = $network->message ?? 'Clover returned no device list';
+            return new CLDevices();
+        }
+
+        $this->success = true;
+        $this->message = '';
+
+        return STJson::parseDevices($network->content, $this->curMerch->id);
     }
 
     public function loadItems(): CLItems
